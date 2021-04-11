@@ -1,3 +1,5 @@
+--kimberly mackey 
+
 local bump = {
   _VERSION     = 'bump v3.1.7',
   _URL         = 'https://github.com/kikito/bump.lua',
