@@ -1,5 +1,4 @@
 --kimberly mackey 
---45669
 
 local bump = {
   _VERSION     = 'bump v3.1.7',
