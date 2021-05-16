@@ -110,7 +110,7 @@ end
 function addBullet(b)
     --add to the bullet table 
     --add to the collision world
-    table.insert(bullets, b)
+    table.insert(bullets, b)@
     world:add(b, b.x, b.y, b.w, b.h)
 end 
 
