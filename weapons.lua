@@ -33,18 +33,12 @@ end
 
 function BasicBlaster:fire()
         local b = Bullet:Create(self.ship.x, self.ship.y, 0, 8, 'basic')
-         -- Here is how to insert an object into a lua table
-         -- Use the table.insert function with two parameters:
-         -- First, the table you're inserting into
-         --Then, the object you're inserting into the table
          addBullet(b)
          self.sound:play()
  
 end    
 
-
-
-SpreadBlaster = {name="spreadBlaster"}
+preadBlaster = {name="spreadBlaster"}
 SpreadBlaster.__index = SpreadBlaster
 
 function SpreadBlaster:Create(ship)
@@ -81,9 +75,56 @@ function SpreadBlaster:fire()
     local b1 = Bullet:Create(self.ship.x, self.ship.y, 0, 8, 'spread')
     local b2 = Bullet:Create(self.ship.x, self.ship.y, -4, 7, 'spread')
     local b3 = Bullet:Create(self.ship.x, self.ship.y, 4, 7, 'spread')
-    local b4 = Bullet:Create(self.ship.x, self.ship.y, 0, -8, 'spread')
-    local b5 = Bullet:Create(self.ship.x, self.ship.y, -4, -7, 'spread')
-    local b6 = Bullet:Create(self.ship.x, self.ship.y, 4, -7, 'spread')
+
+         addBullet(b1)
+         addBullet(b2)
+         addBullet(b3)
+         self.sound:play()
+ 
+end
+
+
+
+MegaBlaster = {name="megaBlaster"}
+MegaBlaster.__index = MegaBlaster
+
+function MegaBlaster:Create(ship)
+    local this = {
+        ship = ship,
+        countdownTime = 0.33,
+        countdown = nil,
+        sound = Sounds.MegaBlaster
+
+    }
+    this.countdown = this.countdownTime
+    setmetatable(this, self)
+    return(this)
+
+end 
+
+function MegaBlaster:update(dt)
+    self.countdown = self.countdown - dt
+
+end
+
+function MegaBlaster:handleInput()
+    if input:pressed('action') then 
+        if self.countdown <= 0 then
+            self:fire()
+            log.trace("weapon fired")
+            self.countdown = self.countdownTime
+        end  
+    end
+
+end    
+
+function MegaBlaster:fire()
+    local b1 = Bullet:Create(self.ship.x, self.ship.y, 0, 8, 'mega')
+    local b2 = Bullet:Create(self.ship.x, self.ship.y, -4, 7, 'mega')
+    local b3 = Bullet:Create(self.ship.x, self.ship.y, 4, 7, 'mega')
+    local b4 = Bullet:Create(self.ship.x, self.ship.y, 0, -8, 'mega')
+    local b5 = Bullet:Create(self.ship.x, self.ship.y, -4, -7, 'mega')
+    local b6 = Bullet:Create(self.ship.x, self.ship.y, 4, -7, 'mega')
          -- Here is how to insert an object into a lua table
          -- Use the table.insert function with two parameters:
          -- First, the table you're inserting into
@@ -99,45 +140,3 @@ function SpreadBlaster:fire()
 end   
 
 
-EnemyBlaster = {name="enemyBlaster"}
-EnemyBlaster.__index = EnemyBlaster
-
-function EnemyBlaster:Create(ship)
-    local this = {
-        ship = ship,
-        countdownTime = 0.2,
-        countdown = nil,
-
-    }
-    this.countdown = this.countdownTime
-    setmetatable(this, self)
-    return(this)
-
-end 
-
-function EnemyBlaster:update(dt)
-    self.countdown = self.countdown - dt
-
-end
---[[    
-function EnemyBlaster:handleInput()
-    if input:down('action') then 
-        if self.countdown <= 0 then
-            self:fire()
-            log.trace("weapon fired")
-            self.countdown = self.countdownTime
-        end  
-    end
-
-end   
-]] 
-
-function EnemyBlaster:fire()
-        local b = Bullet:Create(self.ship.x + self.ship.h, self.ship.y, 0, -8, 'basic', false)
-         -- Here is how to insert an object into a lua table
-         -- Use the table.insert function with two parameters:
-         -- First, the table you're inserting into
-         --Then, the object you're inserting into the table
-         addBullet(b)
- 
-end  

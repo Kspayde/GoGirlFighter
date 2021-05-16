@@ -5,6 +5,7 @@ local bulletGrid = anim8.newGrid(16, 16, imgWidth, imgHeight)
 local bulletAnims = {
     basic = anim8.newAnimation(bulletGrid('1-2', 1), 0.1),
     spread = anim8.newAnimation(bulletGrid('5-6', 2), 0.1),
+    mega = anim8.newAnimation(bulletGrid('5-6', 2), 0.1),
     --rainbow = anim8.newAnimation(bulletGrid('5-6', 2), 0.1),
 
 }
