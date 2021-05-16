@@ -4,7 +4,8 @@ local powerupGrid = anim8.newGrid(16, 16, imgWidth, imgHeight)
 
 local powerupAnims = {
     spread = anim8.newAnimation(powerupGrid('1-2', 1), 0.2),
-    life = anim8.newAnimation(powerupGrid('1-2', 2), 0.2)
+    basic = anim8.newAnimation(powerupGrid('1-2', 2), 0.2)
+    mega= anim8.newAnimation(powerupGrid('1-2', 2), 0.2)
 
 }
 
@@ -21,13 +22,24 @@ gCollectibles = {
 
         end
     },
-    extraLife = {
-        animation = "life",
-        points = 0,
-        action = function(ship, gameWorld)
-            gameWorld:addlife()
-        end 
-    }
+bCollectibles = {
+        spreadBlaster = {
+            animation = "basic",
+            points = 20,
+            action = function(ship, gameWorld)
+                ship.weapon = SpreadBlaster:Create(ship)
+    
+            end
+        },
+mCollectibles = {
+            spreadBlaster = {
+                animation = "mega",
+                points = 200,
+                action = function(ship, gameWorld)
+                    ship.weapon = SpreadBlaster:Create(ship)
+        
+                end
+            },
 }
 
 
@@ -42,9 +54,9 @@ function Collectible:Create(def, x, y, ship, gameWorld)
         points = def.points or 0,
         action = def.action,
         ship = ship, 
-        gameWorld = gameWorld,
-        spawnTimer = 0,
-        spawnTimerMax =1
+        gameWorld = gameWorld
+        spawnTimer = 15,
+        spawnTimerMax =20 
 
     }
 

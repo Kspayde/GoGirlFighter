@@ -20,6 +20,8 @@ function love.load()
 
     collectibles = {}
     c = Collectible:Create(gCollectibles.spreadBlaster, 60, 20, ship, gameWorld)
+    c = Collectible:Create(bCollectibles.basicblaster, 60, 20, ship, gameWorld)
+    c = Collectible:Create(mCollectibles.megaBlaster, 60, 20, ship, gameWorld)
     addCollectible(c)
 
     enemies = {}
