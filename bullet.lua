@@ -65,10 +65,10 @@ function Bullet:handleInput()
     if len > 0 then 
         --we have collosions to resolve
         for _, e in ipairs(cols) do 
-            if e.other.type == "collectible" then 
+            if e.other.type == "enemies" then 
                  e.other:activate(self, gameWorld)
-                 gameWorld:addPoints(c.other.points)
-                 removeCollectible(c.other)
+                 gameWorld:addPoints(e.other.points)
+                 removeEnemy(e.other)
                  Sounds.explosion:play()
             end
 
