@@ -24,7 +24,7 @@ function love.load()
 
     enemies = {}
     e = Enemy:Create(ship, gameWorld)
-    addCollectible(c)
+    addEnemy(c)
 
 
 
