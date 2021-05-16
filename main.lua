@@ -34,6 +34,8 @@ function love.load()
 
     hud = HUD:Create(gameWorld)
 
+    explosion = {}
+
     
 
     

@@ -13,9 +13,11 @@ function Ship:Create(x, y)
         h = 48,
         speed = 5, -- the speed of the ship for movement
         weaponCountdown = 0.2,
-        image = love.graphics.newImage("assets/graphics/ship.png"), -- the ship's graphic image
+        image = love.graphics.newImage("assets/graphics/ship.png"),
+        playerAlive = true,
         weapon = nil,
-        shield = nil 
+        shield = nil, 
+        enemy = nil
     }
 
     this.weapon = BasicBlaster:Create(this)
@@ -48,6 +50,7 @@ end
 
 function Ship:draw()
 
+    ex.animation:draw(self.image, self.x, self.y,)0, 1.5, 1.5)
     self.animation:draw(self.image, self.x, self.y, 0, 1.5, 1.5)
     self.shield:draw()
 end
@@ -100,6 +103,36 @@ function Ship:handleInput()
 
     
 end
+
+function shipCollisions(enemy)
+    for enemy in ipairs(enemies) do
+      if playerAlive and (intersects(ship.self, enemy) or intersects(enemy, ship.self) then
+        local ex= anim8.newGrid(48, 48, imgWidth, imgHeight)
+
+        ex.animation = anim8.newAnimation(g('1-4'), 0.15)
+        love.graphics.newImage("assets/graphics/explosion.png"),
+        
+        table.insert(explosions)
+        playerAlive = false
+        break
+      end
+  
+          table.insert(explosions, explosion)
+          table.remove(enemies)
+          break
+        end
+      end
+    end
+  end
+
+  function intersects(obj1, obj2)
+    if obj1.xPos < obj2.xPos and obj1.xPos + obj1.width > obj2.xPos and
+       obj1.yPos < obj2.yPos and obj1.yPos + obj1.height > obj2.yPos then
+      return true
+    else
+      return false
+    end
+  end
 
   
 
